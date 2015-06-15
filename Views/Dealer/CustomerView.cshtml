@@ -1,0 +1,83 @@
+﻿@{
+    ViewBag.Title = "CustomerView";
+    Layout = "~/Views/Shared/Dealer_Nav.cshtml";
+}
+@model The_Merchant.Models.User
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-7">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Customers
+                </div>
+
+            </div>
+            <div class="panel-body">
+
+                <form action="/Home/Index/" method="post">
+                    <div class="row" align="center">
+                        <div class="col-lg-3" align="right">
+                            <h5>Customer Name :</h5>
+                        </div>
+                        <div class="col-lg-5">
+                            <input type="text" class="form-control" name="Cust_Name" placeholder="Enter Customer Name" />
+                        </div>
+                        <div class="col-lg-2">
+                            <input type="button" class="btn btn-success bg-info" value="Search" />
+                        </div>
+                    </div>
+                  
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                   Searched Customers
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Address</th>
+                                <th>Email Address</th>
+                                <th>Account Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Haseeb</td>
+                                <td>Javed</td>
+                                <td>Sialkot</td>
+                                <td>Bitf12m543@pucit.edu.pk</td>
+                                <td>Admin</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+               
+                
+
+            </div>
+
+        </div>
+    </div>
+

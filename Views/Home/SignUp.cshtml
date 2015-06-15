@@ -1,0 +1,118 @@
+﻿@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model The_Merchant.Models.User
+
+
+<div id='text1' align='center'><h1> Sign Up Free </h1> </div>
+<div id='text2' align='center'><h3> It only takes about 2 minutes </h3></div>
+<div class="row" >
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4" align="center">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                Sign Up
+            </div>
+
+
+
+            <div class="panel-body">
+                @using (Html.BeginForm("CheckSignUp", "Home", FormMethod.Post))
+                {
+
+                    @Html.TextBoxFor(x => x.FName, new { placeholder = "First Name",@id="UserName", @class = "form-control" });
+                    <br/>
+                     
+                    @Html.TextBoxFor(x => x.LName, new { placeholder = "Last Name", @class = "form-control" });
+                    <br/>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            @Html.TextBoxFor(x => x.Email, new { placeholder = "Email Address", @id = "Email", @class = "form-control", type = "email" })
+                            <p id="result"></p>
+                        </div>
+                        <div class="col-lg-3">
+                            <input type="button" value="Check" id="b1" class="btn btn-info" />
+                        </div>
+                        
+                    </div>
+                   
+                    
+                    @Html.TextBoxFor(x => x.Password, new { placeholder = "Password", @class = "form-control", type = "password" });
+                    <br/>
+                    @Html.TextBoxFor(x => x.Address, new { placeholder = "Postal Address", @class = "form-control" });
+                    <br/>
+                    <select class="form-control" name="Type">
+                        <option >
+                            Customer
+                        </option>
+                        <option>
+                            Dealer
+                        </option>
+                    </select>
+                    
+                    <br/>
+                    <div class="col-md-16"><input class="btn btn-success pull-center" type="submit" value="Sign Up" align='center' /></div>
+                @Scripts.Render("~/bundles/jquery")
+                    <script>
+
+    $(document).ready(function () {
+
+        $('#b1').click(function () {
+
+            var email = $('#Email').val();
+
+            $.getJSON("/Home/CheckUsername?Email=" + email, function (data) {
+                $('#checking').hide();
+                if (data) {
+                    $('#result').text("Email already exists in database");
+
+                }
+                else {
+
+                    $('#result').text("Email is available");
+                }
+            });
+
+        });
+
+    });
+</script>
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id='foot'>
+    <footer>
+        <div id='footerLinks' align="center">
+            <a href="Contact.jsp"> Contact Support </a>  |  <a href="#"> Privacy Policy </a>
+        </div>
+
+
+        <br />
+
+    </footer>
+</div>
+
+<script>
+    function Validate()
+    {
+
+        var email = document.forms["SignUp"]["email"].value;
+
+        var re = /^\w+@@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/;
+
+       
+        if (!email.match(re)) {
+            alert('Please fill valie email');
+            return false;
+        }
+
+    }
+</script>

@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "ViewCartItems";
+}
+@model List<The_Merchant.Models.LineItem>
+
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Cart Items
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+
+                            <tr class="success">
+                                <th>Line No</th>
+                                <th>Item Id</th>
+                                <th>Quantity</th>
+                                <th>Subtotal</th>
+
+                                   <th>Delete</th>
+                             </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var obj in Model)
+                            {
+                                <tr class="success">
+                                    <td>@obj.LineId</td>
+                                    <td>@obj.ItemId</td>
+                                    <td>@obj.Quantity</td>
+                                    <td>@obj.SubTotal</td>
+                                   
+                                   <td>
+                                        <a class="btn btn-danger" href="/Home/DeleteItem?id=@obj.LineId">Delete</a>
+                                    </td>
+                                </tr>
+
+                            }
+                            <tr>
+                                <td>
+                                    <h1>@Session["PreviousOrderStatus"]</h1>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>

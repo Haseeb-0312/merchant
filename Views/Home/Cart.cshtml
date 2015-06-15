@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Cart";
+   
+}
+@model The_Merchant.Models.Item
+          <script>
+              function ViewMultiImages(caller) {
+        var myid = $(caller).val();
+        $.ajax({
+            url: '/Home/ShowImages',
+            contentType: 'application/html; charset=utf-8',
+            data: { id: myid },
+            type: 'GET',
+            dataType: 'html'
+        })
+        .success(function (result) {
+            $('#itemImages').html(result);
+        })
+        .error(function (xhr, status) {
+            alert(status);
+        }
+        )
+        //$('#updateItemPanel').show(500);
+    }
+    //$('#updateItemPanel').hide();
+</script>
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="alert alert-info">
+            <h4 align="center" style="font-family:'Tangerine', serif 'Tempus Sans ITC'">Add Items To Cart</h4>
+        </div>
+    </div>
+</div>
+
+
+<div id="cartBody" class="row">
+    <div class="col-lg-4">
+       <img src="~/Content/images/@Model.Path" class="thumbnail" width="400" height="300">
+        <button class="btn btn-primary pull-right" id="@Model.ItemId" value="@Model.ItemId" onclick="ViewMultiImages($(this))">View Images</button>
+    </div>
+    <div class="col-lg-2">
+        <ul >
+            <li>
+               
+                <h5 class="bg-primary" style="font-family:'Tangerine', serif 'Tempus Sans ITC' ">
+                    Item Name: @Model.ItemName
+                </h5>
+            </li>
+            <li>
+                <h5 class="bg-primary" style="font-family:'Tangerine', serif 'Tempus Sans ITC'"> Item Type: @Model.Description</h5>
+</li>
+            <li>
+                <h5 class="bg-primary" style="font-family:'Tangerine', serif 'Tempus Sans ITC'"> Unit Price: @Model.Price</h5>
+</li>
+           
+            <br />
+            <li>
+                <div class="fieldcontainer" data-role="fieldcontain">
+                   
+                    <label>Quantity:</label>
+                    <form action="AddLineItem" method="post" class="form-inline">
+                        <input type="hidden" name="id" value=@Model.ItemId />
+                        <input type="number" name="quantity" size="3" value="1" min="1" max="20" />
+                                                @if(Session["CustomerName"]==null)
+                        {
+                            <input type="submit" class="btn btn-primary" value="Add Item" style="font-family:'Tangerine', serif 'Tempus Sans ITC'" disabled  />
+                            <br /><br />
+                        <div class="alert alert-danger pull-right" style="font-family:'Tangerine', serif 'Tempus Sans ITC'">Sign In To Continue</div>
+                        }
+
+                        else
+                        {
+                                                    <input type="submit" class="btn btn-primary" value="Add Item" style="font-family:'Tangerine', serif 'Tempus Sans ITC'"  />
+                        }
+                    </form>
+                    
+                   
+                        
+                </div>
+            </li>
+        </ul>
+
+    </div>
+    <div class="col-lg-5" id="itemImages"></div>
+    
+   
+</div>

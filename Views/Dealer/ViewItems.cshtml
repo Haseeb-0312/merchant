@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "ViewItems";
+    Layout = "~/Views/Shared/Dealer_Nav.cshtml";
+}
+@model List<The_Merchant.Models.Item>
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-7">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Items
+                </div>
+
+            </div>
+            <div class="panel-body">
+
+                <form action="/Dealer/SearchItem/" method="post">
+                    <div class="row" align="center">
+                        <div class="col-lg-3" align="right">
+                            <h5>Item Name :</h5>
+                        </div>
+                                <div class="col-lg-4">
+                                    <input type="text" class="form-control" name="ItemName" placeholder="Enter Item Name" />
+                                </div>
+
+                                <div class="col-lg-2">
+                                    <input type="submit" class="btn btn-success bg-info" value="Search" required />
+                                </div>
+                           </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Searched Items
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+
+                            <tr class="success">
+                                <th>Item_Id</th>
+                                <th>Item Name</th>
+                                <th>Description</th>
+                                <th>Price</th>
+
+                                <th>Quantity</th>
+                                <th>Pic</th>
+                                <th>Delete</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody >
+
+                            @foreach (var obj in Model)
+{
+    <tr class="success">
+        <td>@obj.ItemId</td>
+        <td>@obj.ItemName</td>
+        <td>@obj.Description</td>
+        <td>@obj.Price</td>
+        <td>@obj.Quantity</td>
+        <td><img src="~/Content/images/@obj.Path" width="20" height="20" /></td>
+        <td>
+            <a class="btn btn-danger" href="/Dealer/Delete?id=@obj.ItemId">Delete</a>
+        </td>
+       
+    </tr>
+
+}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>

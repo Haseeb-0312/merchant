@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "ViewAllContacts";
+Layout = "~/Views/Shared/Admin_Layout.cshtml";
+}
+@model List<The_Merchant.Models.Contact>
+
+         
+
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-10">
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <div class="panel-title">
+                    Searched Items
+                </div>
+
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="sr-only-focusable">
+           
+                            <tr>
+                                <th>Contact_Id</th>
+                                <th>User Id</th>
+                                <th>Seder Name</th>
+                                <th>Message</th>
+                                
+                                <th>Email Address</th>
+                                <th>Delete</th>
+                                <th>Reply</th>
+</tr>
+                        </thead>
+                        <tbody>
+                           
+                            @foreach (var obj in Model)
+{
+    <tr class="danger">
+        <td>@obj.Id</td>
+        <td>@obj.UId</td>
+        <td>@obj.Name</td>
+        <td>@obj.Message</td>
+        <td>@obj.ContactEmail</td>
+        
+        <td>
+            <a class="btn btn-danger" href="/Admin/DeleteContact?id=@obj.Id"> Delete</a>
+        </td>    
+        <td>
+            <a class="btn btn-primary" href="/Admin/UpdateContact?id=@obj.Id">Reply</a>
+        </td>
+    </tr>
+
+}
+                               
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+

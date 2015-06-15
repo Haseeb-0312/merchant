@@ -1,0 +1,90 @@
+﻿@{
+    ViewBag.Title = "Dealer_Nav";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    @using The_Merchant.Controllers
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/bootstrap/css/bootstrap-theme.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap/css/bootstrap.min.css" />
+
+    <script type="text/javascript" src="~/Content/jquery/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+
+    <style>
+        hr {
+            display: block;
+            height: 2px;
+            border: 0;
+            border-top: 1px solid #ccc;
+            margin: 1em 0;
+            padding: 0;
+            border-color: blue;
+        }
+    </style>
+</head>
+<body class="cover">
+    <nav class="navbar navbar-default" role="navigation">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+
+            <a class="navbar-brand">The Merchant</a>
+
+        </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="/Dealer/Index/">Home</a>
+                </li>
+                <li>
+                    <a href="/Dealer/AddItem/">Add Item</a>
+                </li>
+                <li>
+                    <a href="/Dealer/ViewItems/">View Items</a>
+                </li>
+                
+                
+                
+                
+            @if (@Session["DealerName"] != null)
+            {
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Welcome,@Session["DealerName"] <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="/Dealer/SignOut">Sign Out</a>
+                        </li>
+
+                    </ul>
+                </li>
+            }
+
+
+
+
+            </ul>
+
+        </div>
+
+    </nav>
+  
+
+
+
+
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

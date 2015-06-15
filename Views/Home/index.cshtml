@@ -1,0 +1,188 @@
+﻿@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using The_Merchant.Controllers
+@model List<The_Merchant.Models.Item>
+
+<style>
+    div.img {
+        margin: 5px;
+        border: 1px solid #000000;
+        height: 250px;
+        width: 250px;
+        float: left;
+        text-align: center;
+    }
+</style>
+
+<script>
+    $(document).ready(function () {
+        $('#SearchBox').autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: "/Home/Result",
+                    type: "POST",
+                    dataType: "json",
+                    data: { searchTag: request.term },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return { label: item.name, value: item.name };
+                        }))
+
+
+                    }
+                })
+            },
+            messages: {
+                noResults: "No Result Found", results: ""
+            }
+        });
+    });
+    
+
+
+</script>
+<div class="row">
+    <div class="col-lg-1"></div>
+    <div class="col-lg-1">
+        <img src="~/Content/images/merchant.jpg" height="35" width="80" align="middle" alt="~/Content/images/merchant.jpg" />
+    </div>
+    <form method="post" action="/Home/SearchedItems">
+        <div class="col-lg-5">
+            <input type="text" class="form-control" id="SearchBox" name="ItemName" placeholder="Shopping Is Fun...." />
+        </div>
+        <div class="col-lg-2">
+            <select class="form-control" name="Description">
+                <option>
+                    All Catagories
+                </option>
+                @foreach (var v in ViewBag.list)
+                {
+
+                    <option>
+                        @v
+                    </option>
+                }
+            </select>
+        </div>
+        <div class="col-lg-2">
+            <select class="form-control" name="myPrice">
+                <option>Price Range</option>
+                <option>100-1000</option>
+                <option>1000-2000</option>
+                <option>2000-3000</option>
+                <option>3000-4000</option>
+
+                </select>
+</div>
+        <div class="col-lg-1">
+            <input type="submit" class="btn btn-primary pull-left" value="Search" />
+        </div>
+    </form>
+</div>
+<br/>
+<div class="rows">
+    <div class="col-md-3">
+        <div class="list-group">
+            <a class="list-group-item active" align="center">Categories</a>
+            
+            <a class="list-group-item" href="/Home/Catalouge?type=Boxing"> <span class="glyphicon glyphicon-compressed"></span> Boxing Gloves</a>
+                <a class="list-group-item" href="/Home/Catalouge?type=Shirt"><span class="glyphicon glyphicon-user"></span> Shirts</a>
+                <a class="list-group-item" href="/Home/Catalouge?type=Watch"><span class="glyphicon glyphicon-hand-left"></span> Watches</a>
+                <a class="list-group-item" href="/Home/Catalouge?type=Shoe"> <span class="glyphicon glyphicon-sunglasses"></span> Shoes</a>
+                <a class="list-group-item" href="/Home/Catalouge?type=Bag"> <span class="glyphicon glyphicon-book"></span> Hand Bags</a>
+                <a class="list-group-item" href="/Home/Catalouge?type=Jewelery"><span class="glyphicon glyphicon-queen"></span> Jewellery</a>
+</div>
+    </div>
+    <div class="col-md-7">
+
+        <header id="myCarousel" class="carousel slide">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="item active">
+                    <div>
+                        <img class="img-responsive img-hover" src="~/Content/images/slider1.jpg" alt="">
+                    </div>
+                    <div class="carousel-caption">
+
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <img class="img-responsive img-hover" src="~/Content/images/shopping.jpg" alt="">
+                    </div>
+                    <div class="carousel-caption">
+                    </div>
+                </div>
+                <div class="item">
+                    <div>
+                        <img class="img-responsive img-hover" src="~/Content/images/slider3.jpg" alt="">
+                    </div>
+                    <div class="carousel-caption">
+                    </div>
+                </div>
+            </div>
+
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <span class="icon-next"></span>
+            </a>
+
+        </header>
+    </div>
+    <div class="col-md-2">
+        <div class="panel panel-primary">
+            <div class="panel panel-heading"  align="center">
+                Latest
+            </div>
+            <div class="panel panel-body" style="max-height: 220px;" >
+                <marquee onmouseover=" this.stop();" onmouseout="this.start();"
+                 behavior="scroll" direction="up" scrollamount="2">
+               
+                @foreach (var news in ViewBag.NewsList)
+                {
+                     <a href="/Home/Catalouge?type=@news.Type">
+                   @news.News1
+                </a>
+                    <br /><br />
+                }
+               
+               
+                </marquee>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <div class="row">
+
+        <div class="col-lg-12">
+            <div class="alert alert-info">Featured Items</div>
+        </div>
+    </div>
+    @foreach (var i in Model)
+{
+    <div class="img" >
+        <div align="center">
+            <a href="/Home/Cart?id=@i.ItemId">
+                <h4>@i.ItemName</h4>
+                
+                <img class="img-responsive img-portfolio img-hover" align="middle" src="~/Content/images/@i.Path" alt="" width="100" height="80">
+               
+                    <h5>@i.ItemName</h5>
+                    <h4>Price:@i.Price </h4>
+               
+              </a>
+        </div>
+        
+    </div>
+
+}

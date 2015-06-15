@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "OrderItems";
+}
+@model List<The_Merchant.Models.LineItem>
+<div class="container">
+    <table class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                
+                
+                <td>
+                    Item Id
+                </td>
+                <td>
+                    Quantity
+                </td>
+                <td>
+                    Sub Total
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model)
+            {
+                <tr>
+                   
+                    <td> @i.ItemId</td>
+
+                    <td> @i.Quantity</td>
+ 
+                    <td>@i.SubTotal</td>
+                    </tr>
+            }
+
+        </tbody>
+
+
+    </table>
+    <div class="row">
+        <div class="col-lg-5">
+           
+            <div class="alert alert-info"><h4>Your Grand Total :@TempData["TotalOfCart"]</h4></div>
+            @{TempData.Keep("TotalOfCart");}
+          
+        </div>    
+          
+     </div> 
+
+    <div class="row">
+        @if (Session["CustomerName"] != null)
+        {
+             <div class="col-lg-5" >
+                     <a class="btn btn-info" href="/Home/AddToCart">Check Out</a>
+             </div>
+        }
+       
+
+    </div> 
+</div>
+
+

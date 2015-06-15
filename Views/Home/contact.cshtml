@@ -1,0 +1,91 @@
+﻿@{
+    ViewBag.Title = "contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model The_Merchant.Models.Contact
+<div class="container" id='contactPage'>
+    <div class="row">
+
+        <div class="col-lg-1">
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="panel panel-info">
+                <div class="panel panel-heading">
+                    <div class='panal panel-title'>
+                        Contact Us
+                    </div>
+                </div>
+
+                <div class='panel panel-body'>
+
+                    <form action="~/Home/SaveMessage"class="form" method="post">
+                        <div class="form-group">
+                            @if (Session["CustomerName"] != null)
+                            {
+                                <input type="text" class="form-control" name="Name"value="@Model.Name" required>
+                            }
+                            else
+                            { 
+                                <input type="text" class="form-control" name="Name" id="InputName" placeholder="Enter Name" required>
+                            }
+                                </div>
+
+                        <div class="form-group">
+                            @if (Session["CustomerName"] != null)
+                            {
+                                <input type="hidden" name="UId" value="@Model.UId"/>
+                                <input type="email" class="form-control" name="ContactEmail" placeholder="Enter Email" value="@Model.ContactEmail" required>
+                            }
+                            else
+                            {
+                                <input type="email" class="form-control" name="ContactEmail" id="InputName" placeholder="Enter Email" required>
+                            }
+                        </div>
+
+                        <div class="form-group">
+
+                            <textarea name="Message" class="form-control" rows="5" placeholder='Enter Message' required></textarea>
+                        </div>
+
+                        <input type="submit" name="submit" id="submit" value="Contact" class="btn btn-info pull-right">
+                    </form>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-lg-5" align="center">
+            <h3>Contact Details</h3>
+            <p>
+                17/108 Canal Road<br>Lahore,Pakistan<br>
+            </p>
+            <p>
+                <i class="fa fa-phone"></i>
+                <abbr title="Phone">P</abbr>: (+92) 312-7120312
+            </p>
+            <p>
+                <i class="fa fa-envelope-o"></i>
+                <abbr title="Email">E</abbr>: <a href="mailto:bitf12m543@pucit.edu.pk">bitf12m543@pucit.edu.pk</a>
+            </p>
+            <p>
+                <i class="fa fa-clock-o"></i>
+                <abbr title="Hours">H</abbr>: Monday - Friday: 9:00 AM to 5:00 PM
+            </p>
+            <ul class="list-unstyled list-inline list-social-icons">
+                <li>
+                    F : <a href="https://www.facebook.com/haseeb.javed55"><i class="fa fa-facebook-square fa-2x"></i>https://www.facebook.com/haseeb.javed55</a>
+                </li>
+                <li>
+                    T : <a href="https://twitter.com/HaseebJaved35"><i class="fa fa-facebook-square fa-2x"></i>https://twitter.com/HaseebJaved35</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a>
+                </li>
+            </ul>
+        </div>
+        <hr class="featurette-divider hidden-lg">
+
+    </div>
+
+</div>
