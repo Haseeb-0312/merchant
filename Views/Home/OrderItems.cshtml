@@ -37,13 +37,25 @@
 
     </table>
     <div class="row">
+@if (@Session["CustomerName"] != null)
+{
         <div class="col-lg-5">
            
             <div class="alert alert-info"><h4>Your Grand Total :@TempData["TotalOfCart"]</h4></div>
             @{TempData.Keep("TotalOfCart");}
           
-        </div>    
+        </div> 
           
+}
+else
+{
+ <div class="col-lg-5">
+           
+            <div class="alert alert-info"><h4>No Orders/Sign In To Complete Order</h4></div>
+            @{TempData.Keep("TotalOfCart");}
+          
+        </div>       
+}
      </div> 
 
     <div class="row">

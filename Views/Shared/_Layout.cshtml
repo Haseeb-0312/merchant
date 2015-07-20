@@ -54,9 +54,12 @@
                 <li style="font-family:'Tangerine', serif 'Tempus Sans ITC'">
                     <a href="/Home/ViewOrderItems" style="margin:auto">Order Items <span class="glyphicon glyphicon-shopping-cart"></span></a>
                 </li>
+@if (@Session["CustomerName"] != null)
+{
                 <li style="font-family:'Tangerine', serif 'Tempus Sans ITC'">
                     <a href="/Home/ViewPreviousOrders" style="margin:auto">Previous Orders<span class="glyphicon glyphicon-shopping-cart"></span></a>
                 </li>
+}
                 <li style="font-family:'Tangerine', serif 'Tempus Sans ITC'">
                     <a href="/Home/Contact/" style="margin:auto">Contact <span class="glyphicon glyphicon-th-list"></span></a>
                 </li>

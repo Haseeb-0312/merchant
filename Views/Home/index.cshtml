@@ -161,6 +161,39 @@
     </div>
 
 </div>
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="alert alert-info">Most Buyed</div>
+    </div>
+</div>
+@{
+
+    int count = 0;
+
+    foreach (var i in ViewBag.MostBuyedCat)
+    {
+        if (count < 5)
+        {
+            <div class="img">
+                <div align="center">
+                    <a href="/Home/Cart?id=@i.ItemId">
+                        <h4>@i.ItemName</h4>
+
+                        <img class="img-responsive img-portfolio img-hover" align="middle" src="~/Content/images/@i.Path" alt="" width="100" height="80">
+
+                        <h5>@i.ItemName</h5>
+                        <h4>Price:@i.Price </h4>
+
+                    </a>
+                </div>
+
+            </div>
+            count++;
+        }
+    }
+
+}
 
     <div class="row">
 
